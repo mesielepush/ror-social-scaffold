@@ -9,49 +9,20 @@
   </head>
   <body>
 
-  <div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        <h4 class="text-white">Collapsed content</h4>
-        <span class="text-muted">Toggleable via the navbar brand.</span>
-      </div>
-    </div>
-    <nav class="navbar navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </nav>
-  </div>
-
-    <nav class="nav">
-      <%= link_to 'Stay in touch', root_path %>
-      <div class="menu">
-        <div class="menu-item">
-          <%= menu_link_to 'Timeline', posts_path %>
+    <%= render partial: "layouts/header" %>  
+      <% if notice.present? %>
+        <div class="notice">
+          <p> <%= notice %> </p>
         </div>
-        <div class="menu-item">
-          <%= menu_link_to 'All users', users_path %>
-        </div>
-      </div>
-      <% if current_user %>
-        <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign in', user_session_path %>
       <% end %>
-    </nav>
-    
-    <% if notice.present? %>
-      <div class="notice">
-        <p> <%= notice %> </p>
-      </div>
-    <% end %>
-    <% if alert.present? %>
-      <div class="alert">
-        <p> <%= alert %> </p>
-      </div>
-    <% end %>
-    <main class="main">
-      <%= yield %>
-    </main>
+      <% if alert.present? %>
+        <div class="alert">
+          <p> <%= alert %> </p>
+        </div>
+      <% end %>
+      <main class="main">
+        <%= yield %>
+      </main>
+    <%= render partial: "layouts/footer" %>  
   </body>
 </html>
