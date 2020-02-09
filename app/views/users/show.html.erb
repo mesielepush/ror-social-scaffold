@@ -1,9 +1,26 @@
 <section class="user-section">
-  <h2><%= "Name: #{@user.name}" %></h2>
+<% if current_user.id == @user.id%>
+    
+    <% if current_user.gravatar_url == nil %>
+      no photo profile
+      <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class:'btn btn-info' %>
+    <% else %>
+      
+      <%= image_tag( current_user.gravatar_url, width: 120, height: 120 ) %>
+      
+     <% end  %>
+    
+    <h2 style='margin-top: 15px'><%= " hi, #{current_user.name}" %></h2>
+    
+<% else %>
+    <h2><%= " this is: #{@user.name}" %></h2>
+<% end %>
+  
   <article class="timeline">
-    <h3>Recent posts:</h3>
+    <h3> Lastest %> </h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
+    
   </article>
 </section>

@@ -10,5 +10,8 @@ class UsersController < ApplicationController
     @posts = @user.posts.ordered_by_most_recent
   end
   
-  
+  def update
+    @user = User.find(params[:id])
+  end
+
 end

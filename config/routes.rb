@@ -18,7 +18,10 @@
 #                           DELETE /users(.:format)                                                                         devise/registrations#destroy
 #                           POST   /users(.:format)                                                                         devise/registrations#create
 #                     users GET    /users(.:format)                                                                         users#index
+#                 edit_user GET    /users/:id/edit(.:format)                                                                users#edit
 #                      user GET    /users/:id(.:format)                                                                     users#show
+#                           PATCH  /users/:id(.:format)                                                                     users#update
+#                           PUT    /users/:id(.:format)                                                                     users#update
 #             post_comments POST   /posts/:post_id/comments(.:format)                                                       comments#create
 #                post_likes POST   /posts/:post_id/likes(.:format)                                                          likes#create
 #                 post_like DELETE /posts/:post_id/likes/:id(.:format)                                                      likes#destroy
@@ -33,11 +36,11 @@
 Rails.application.routes.draw do
 
   root 'posts#index'
-
+  
   devise_for :users
 
-  resources :users, only: [:index, :show]
-  resources :posts, only: [:index, :create] do
+    resources :users, only: [:show, :edit, :update, :index]
+    resources :posts, only: [:index, :create] do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
   end
