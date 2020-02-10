@@ -1,26 +1,45 @@
 <section class="user-section">
-<% if current_user.id == @user.id%>
-    
-    <% if current_user.gravatar_url == nil %>
-      no photo profile
-      <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class:'btn btn-info' %>
-    <% else %>
+  <% if current_user.id == @user.id%>
       
-      <%= image_tag( current_user.gravatar_url, width: 120, height: 120 ) %>
+      <% if current_user.gravatar_url == nil %>
+        ||no photo||
+        <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class:'btn btn-info' %>
+      <% else %>
+        
+        <%= image_tag( current_user.gravatar_url, width: 120, height: 120 ) %>
+        
+      <% end  %>
       
-     <% end  %>
-    
-    <h2 style='margin-top: 15px'><%= " hi, #{current_user.name}" %></h2>
-    
-<% else %>
-    <h2><%= " this is: #{@user.name}" %></h2>
-<% end %>
+      <h2 style='margin-top: 15px'><%= " hi, #{current_user.name}" %></h2>
+
+
+      
+  <% else %>
+      <h2><%= "this is: #{@user.name}, #{@user.id},#{current_user.id}" %></h2>
+      <% if  current_user.friend? @user.id %>
+        <h4><%= "#{@user.name} is your friend" %></h2>
+      <% elsif current_user.pending_friends.include? @user.id  %>
+        <h4><%= "#{@user.name} hasn't confirmed your frienship" %></h2>
+      <% elsif  current_user.friend_requests.include? @user.id %>
+          <%= link_to 'confirm friend', confirm_friend_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
+      <% end  %>
+<%= link_to 'confirm friend', confirm_friend_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
+<%= link_to 'request_friendship', request_friendship_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>      
+      
+      
+      <% if @user.gravatar_url != nil %>
+        <%= image_tag( @user.gravatar_url, width: 120, height: 120 ) %>
+      <% end  %>
+
+  <% end %>
   
   <article class="timeline">
+    
     <h3> Lastest %> </h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
     
   </article>
+
 </section>

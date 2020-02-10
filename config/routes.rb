@@ -2,6 +2,8 @@
 #
 #                    Prefix Verb   URI Pattern                                                                              Controller#Action
 #                      root GET    /                                                                                        posts#index
+#        request_friendship GET    /request_friendship(.:format)                                                            friendships#create
+#           waiting_request GET    /waiting_request(.:format)                                                               friendships#index
 #          new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #              user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #      destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
@@ -36,7 +38,10 @@
 Rails.application.routes.draw do
 
   root 'posts#index'
-  
+  get '/request_friendship',   to: 'friendships#create'
+  get '/waiting_request', to: 'friendships#index'
+  get '/confirm_friend', to: 'friendships#new'
+
   devise_for :users
 
     resources :users, only: [:show, :edit, :update, :index]
