@@ -28,29 +28,34 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
-  def friends(current_user)
+  def friends
+    your_request = Friendship.where(["user_id = :u, confirmed = :b", { u: self.id, b: true }])
+   
+    your_request.each do |x|
+      puts x.name
+    end
 
-    pending_friends + your_request
+    their_request = Friendship.where(["friend_id = :u", { u: self.id }])
+    their_request.map{|friendship| friendship.user_id if friendship.confirmed == true}
+    their_request.compact
+
+    pending_friends + friend_requests
     pending_friends.compact
   end
 
-  def pending_friends(current_user)
-    your_request = Friendship.where(["user_id = :u", { u: current_user }])
+  def pending_friends
+    your_request = Friendship.where(["user_id = :u", { u: self.id }])
     your_request.map{|friendship| friendship.friend_id if !friendship.confirmed }
     your_request.compact
   end
   
-  def friend_requests(current_user)
-    their_request = Friendship.where(["friend_id = :u", { u: current_user }])
+  def friend_requests
+    their_request = Friendship.where(["friend_id = :u", { u: self.id }])
     their_request.map{|friendship| friendship.user_id if !friendship.confirmed }
     their_request.compact
   end
 
-  def confirm_friend(user)
-    friendship = friend_requests.find{|friendship| friendship.user_id == user}
-    friendship.confirmed = true
-    friendship.save
-  end
+  
 
   def friend?(user)
     friends.include?(user)

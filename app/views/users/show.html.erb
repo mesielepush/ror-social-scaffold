@@ -19,7 +19,7 @@
       
         
       
-<%= link_to 'confirm friend', confirm_friend_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
+<%= link_to 'confirm friend', confirm_friend_url( user_id: @user.id, friend_id: current_user.id), class:'btn btn-info' %>
 <%= link_to 'request_friendship', request_friendship_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>      
       
       
