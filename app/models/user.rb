@@ -28,26 +28,26 @@ class User < ApplicationRecord
   has_many :friendships
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
-  def friends
+  def friends(current_user)
 
+    pending_friends + your_request
+    pending_friends.compact
+  end
+
+  def pending_friends(current_user)
     your_request = Friendship.where(["user_id = :u", { u: current_user }])
+    your_request.map{|friendship| friendship.friend_id if !friendship.confirmed }
+    your_request.compact
+  end
+  
+  def friend_requests(current_user)
     their_request = Friendship.where(["friend_id = :u", { u: current_user }])
-    friends_you_asked_for  = your_request.map{|friendship| friendship.friend_id if friendship.confirmed }
-    friends_they_asked_for = their_request.map{|friendship| friendship.user_id if friendship.confirmed }
-
-    friends_array = friendships.map{|friendship| friendship.friend if friendship.confirmed}
-    friends_array + inverse_friendships.map{|friendship| friendship.user if friendship.confirmed}
-    friends_array.compact
+    their_request.map{|friendship| friendship.user_id if !friendship.confirmed }
+    their_request.compact
   end
 
-  def pending_friends
-    friendships.map{|friendship| friendship.friend if !friendship.confirmed}.compact
-  end
-  def friend_requests
-    inverse_friendships.map{|friendship| friendship.user if !friendship.confirmed}.compact
-  end
   def confirm_friend(user)
-    friendship = inverse_friendships.find{|friendship| friendship.user == user}
+    friendship = friend_requests.find{|friendship| friendship.user_id == user}
     friendship.confirmed = true
     friendship.save
   end

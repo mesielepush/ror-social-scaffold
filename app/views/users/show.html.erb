@@ -17,7 +17,7 @@
   <% else %>
       <h2><%= "this is: #{@user.name}" %></h2>
       
-        <h4><%= "#{@user.name} is your friend" %></h2>
+        
       
 <%= link_to 'confirm friend', confirm_friend_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
 <%= link_to 'request_friendship', request_friendship_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>      
