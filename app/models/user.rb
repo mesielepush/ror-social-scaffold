@@ -29,6 +29,12 @@ class User < ApplicationRecord
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
   def friends
+
+    your_request = Friendship.where(["user_id = :u", { u: current_user }])
+    their_request = Friendship.where(["friend_id = :u", { u: current_user }])
+    friends_you_asked_for  = your_request.map{|friendship| friendship.friend_id if friendship.confirmed }
+    friends_they_asked_for = their_request.map{|friendship| friendship.user_id if friendship.confirmed }
+
     friends_array = friendships.map{|friendship| friendship.friend if friendship.confirmed}
     friends_array + inverse_friendships.map{|friendship| friendship.user if friendship.confirmed}
     friends_array.compact
