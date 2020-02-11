@@ -3,14 +3,10 @@ require 'faker'
 
 RSpec.describe Friendship, type: :model do
   describe 'validation tests' do
-    let!(:user_1) { User.new(name: Faker::Name.name,
-                             email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
-    let!(:user_2) { User.new(name: Faker::Name.name,
-                             email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
-    let!(:user_3) { User.new(name: Faker::Name.name,
-                             email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
-    let!(:user_4) { User.new(name: Faker::Name.name,
-                             email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
+    let!(:user_1) { User.new(name: Faker::Name.name, email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
+    let!(:user_2) { User.new(name: Faker::Name.name, email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
+    let!(:user_3) { User.new(name: Faker::Name.name, email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
+    let!(:user_4) { User.new(name: Faker::Name.name, email: Faker::Internet.email, password: 'pppppp', password_confirmation: 'pppppp') }
 
     # let(:valid_friendship) { FactoryBot.create(:friendship) }
     let(:friendship) { Friendship.new(user_id: nil, friend_id: nil, confirmed: false) }
