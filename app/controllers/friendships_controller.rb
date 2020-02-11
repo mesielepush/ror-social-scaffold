@@ -5,7 +5,7 @@ class FriendshipsController < ApplicationController
       @friendship = Friendship.new(user_id: params[:user_id], friend_id: params[:friend_id], confirmed: false)
 
       if @friendship.save
-        redirect_to users_path, notice: 'Friend request send.'
+
       else
         redirect_to users_path, alert: 'Friend request wasnt created.'
       end
