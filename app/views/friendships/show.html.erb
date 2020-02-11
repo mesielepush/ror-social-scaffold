@@ -1,0 +1,20 @@
+<div class= 'requests'>
+    <div>
+    <h3>
+            This are your friends:
+           
+        </h3>
+        <ul>
+            <% current_user.friends.each do |x| %>
+                <li>
+                <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
+                <%= link_to label, user_path(x), class: 'post-author' %>
+                    
+                </li>
+            <% end %>
+        </ul>
+    </div>
+    
+    
+        
+</div>    

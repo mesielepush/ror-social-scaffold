@@ -23,6 +23,7 @@ class FriendshipsController < ApplicationController
         render :index, alert: 'sdad.'
     end
     def new
+
         friendship = Friendship.find_by(user_id:params[:user_id], friend_id:params[:friend_id])
         friendship.confirmed = true
         if friendship.save

@@ -32,10 +32,10 @@ class User < ApplicationRecord
     your_request = Friendship.where(["user_id = :u", { u: self.id }])
     their_request = Friendship.where(["friend_id = :u", { u: self.id }])
 
-    your_request.map{|friendship| friendship.friend_id if friendship.confirmed == true}
-    their_request.map{|friendship| friendship.user_id if friendship.confirmed == true}
-    their_request.compact
-    your_request.compact
+    your_request = your_request.map{|friendship| friendship.friend_id if friendship.confirmed == true}
+    their_request = their_request.map{|friendship| friendship.user_id if friendship.confirmed == true}
+    their_request = their_request.compact
+    your_request = your_request.compact
 
     your_request + their_request
     your_request.compact
@@ -43,13 +43,13 @@ class User < ApplicationRecord
 
   def pending_friends
     your_request = Friendship.where(["user_id = :u", { u: self.id }])
-    your_request.map{|friendship| friendship.friend_id if !friendship.confirmed }
+    your_request = your_request.map{|friendship| friendship.friend_id if friendship.confirmed == false}
     your_request.compact
   end
   
   def friend_requests
     their_request = Friendship.where(["friend_id = :u", { u: self.id }])
-    their_request.map{|friendship| friendship.user_id if !friendship.confirmed }
+    their_request = their_request.map{|friendship| friendship.user_id if !friendship.confirmed == false}
     their_request.compact
   end
 

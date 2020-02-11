@@ -6,7 +6,7 @@
         <ul>
             <% current_user.friend_requests.each do |x| %>
                 <li>
-                    <%= User.find_by_id(x.user_id).name %> 
+                    <%= User.find_by_id(x).name %> 
                 </li>
             <% end %>
         </ul>
@@ -19,7 +19,7 @@
         <ul>
             <% current_user.pending_friends.each do |x| %>
                 <li>
-                    <%= User.find_by_id(x.friend_id).name %>
+                    <%= User.find_by_id(x).name %>
                 </li>
             <% end %>
         </ul>
