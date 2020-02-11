@@ -15,6 +15,10 @@ class FriendshipsController < ApplicationController
     
     end
 
+    def show
+        
+    end 
+    
     def index
         render :index, alert: 'sdad.'
     end
@@ -22,7 +26,7 @@ class FriendshipsController < ApplicationController
         friendship = Friendship.find_by(user_id:params[:user_id], friend_id:params[:friend_id])
         friendship.confirmed = true
         if friendship.save
-            redirect_to users_path, notice: 'You guys are freinds now.'
+            redirect_to friends_path, notice: 'You guys are freinds now.'
         else
             redirect_to users_path, alert: 'Something happened!!!!!!!!!!!.'
         end

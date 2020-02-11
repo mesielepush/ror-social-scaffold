@@ -29,18 +29,16 @@ class User < ApplicationRecord
   has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id'
 
   def friends
-    your_request = Friendship.where(["user_id = :u, confirmed = :b", { u: self.id, b: true }])
-   
-    your_request.each do |x|
-      puts x.name
-    end
-
+    your_request = Friendship.where(["user_id = :u", { u: self.id }])
     their_request = Friendship.where(["friend_id = :u", { u: self.id }])
+
+    your_request.map{|friendship| friendship.friend_id if friendship.confirmed == true}
     their_request.map{|friendship| friendship.user_id if friendship.confirmed == true}
     their_request.compact
+    your_request.compact
 
-    pending_friends + friend_requests
-    pending_friends.compact
+    your_request + their_request
+    your_request.compact
   end
 
   def pending_friends
@@ -58,6 +56,9 @@ class User < ApplicationRecord
   
 
   def friend?(user)
-    friends.include?(user)
+    friends.each do |x|
+      return true if x == user
+    end
+    false
   end
 end

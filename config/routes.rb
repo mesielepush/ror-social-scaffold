@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   get '/request_friendship',   to: 'friendships#create'
   get '/waiting_request', to: 'friendships#index'
   get '/confirm_friend', to: 'friendships#new'
-
+  get '/friends', to: 'friendships#show'
   devise_for :users
 
     resources :users, only: [:show, :edit, :update, :index]
