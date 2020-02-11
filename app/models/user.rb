@@ -37,7 +37,7 @@ class User < ApplicationRecord
     their_request = their_request.compact
     your_request = your_request.compact
 
-    your_request + their_request
+    your_request += their_request
     your_request.compact
   end
 
