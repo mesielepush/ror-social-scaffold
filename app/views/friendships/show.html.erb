@@ -5,6 +5,7 @@
            
         </h3>
         <ul>
+        
             <% current_user.friends.each do |x| %>
                 <li>
                 <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
@@ -18,3 +19,4 @@
     
         
 </div>    
+

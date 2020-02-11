@@ -38,7 +38,7 @@ class User < ApplicationRecord
     your_request = your_request.compact
 
     your_request += their_request
-    your_request.compact
+    your_request.compact.to_set
   end
 
   def pending_friends
@@ -49,7 +49,7 @@ class User < ApplicationRecord
 
   def friend_requests
     their_request = Friendship.where(['friend_id = :u', { u: id }])
-    their_request = their_request.map { |friendship| friendship.user_id if !friendship.confirmed == false }
+    their_request = their_request.map { |friendship| friendship.user_id if friendship.confirmed == false }
     their_request.compact
   end
 

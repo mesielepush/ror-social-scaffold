@@ -6,7 +6,9 @@
         <ul>
             <% current_user.friend_requests.each do |x| %>
                 <li>
-                    <%= User.find_by_id(x).name %> 
+                    
+                    <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
+                    <%= link_to label, user_path(x), class: 'post-author' %>
                 </li>
             <% end %>
         </ul>
@@ -19,7 +21,8 @@
         <ul>
             <% current_user.pending_friends.each do |x| %>
                 <li>
-                    <%= User.find_by_id(x).name %>
+                    <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
+                    <%= link_to label, user_path(x), class: 'post-author' %>
                 </li>
             <% end %>
         </ul>
