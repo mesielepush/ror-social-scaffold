@@ -4,6 +4,8 @@
 #                      root GET    /                                                                                        posts#index
 #        request_friendship GET    /request_friendship(.:format)                                                            friendships#create
 #           waiting_request GET    /waiting_request(.:format)                                                               friendships#index
+#            confirm_friend GET    /confirm_friend(.:format)                                                                friendships#new
+#                   friends GET    /friends(.:format)                                                                       friendships#show
 #          new_user_session GET    /users/sign_in(.:format)                                                                 devise/sessions#new
 #              user_session POST   /users/sign_in(.:format)                                                                 devise/sessions#create
 #      destroy_user_session DELETE /users/sign_out(.:format)                                                                devise/sessions#destroy
