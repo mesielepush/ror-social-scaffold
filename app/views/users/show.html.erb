@@ -31,9 +31,9 @@
             wainting for response
           <p>
         <% else  %>
-          <%= link_to 'request_friendship', request_friendship_url(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
+          <%= link_to 'request_friendship', request_friendship_path(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
         <% end  %>
-        
+
       <% end  %>
             
       <% if @user.gravatar_url != nil %>
