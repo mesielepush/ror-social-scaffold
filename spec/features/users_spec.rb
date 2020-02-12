@@ -5,7 +5,7 @@ RSpec.describe 'Users feature', type: :feature do
     has_x = { name: 'Mike', email: 'mike@monstersinc.com' }
     has_x[:password] = 'wasausky'
     has_x[:password_confirmation] = 'wasausky'
-    
+
     has_x
   end
 
@@ -33,7 +33,6 @@ RSpec.describe 'Users feature', type: :feature do
     fill_in 'user_password', with: user_valid[:password]
     click_button 'Log in'
     expect(page).to have_content 'Signed in successfully.'
-    
   end
 
   scenario 'User fails log in' do
@@ -70,9 +69,8 @@ RSpec.describe 'Users feature', type: :feature do
     Post.create(user_id: user.id, content: 'Lorem Impsum')
     visit user_path(user)
     expect(page).to have_content user.name
-    
+
     expect(page).to have_content user.posts.last.content
-    
   end
 
   scenario 'User edit form renders properly' do
@@ -85,7 +83,7 @@ RSpec.describe 'Users feature', type: :feature do
 
     visit edit_user_registration_path(user)
     assert_selector "input[name='user[email]']"
-    
+
     assert_selector "input[name='user[gravatar_url]']"
   end
 
@@ -98,19 +96,17 @@ RSpec.describe 'Users feature', type: :feature do
     fill_in 'user_password', with: user.password
     click_button 'Log in'
 
-    fake_user = { name: 'Fake'}
+    fake_user = { name: 'Fake' }
     visit edit_user_registration_path(user)
 
     fill_in 'user[name]', with: fake_user[:name]
-    
+
     fill_in 'user_current_password', with: 'pppppp'
     click_button 'Update'
-    
+
     visit user_path(user.id)
-    
+
     expect(page).to have_content fake_user[:name]
-    
-    
   end
 
   scenario 'Index Should show the list of users' do
@@ -126,7 +122,6 @@ RSpec.describe 'Users feature', type: :feature do
 
     visit users_path
     expect(page).to have_content user2.name
-    
   end
 
   scenario 'unsigned user can\'t see other users profile' do

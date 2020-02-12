@@ -20,9 +20,9 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
-    @timeline_posts ||= Post.where({ user_id: [current_user.friends.append(current_user.id) ]}).ordered_by_most_recent
-    
-    return @timeline_posts
+    @timeline_posts ||= Post.where(user_id: [current_user.friends.append(current_user.id)]).ordered_by_most_recent
+
+    @timeline_posts
   end
 
   def post_params

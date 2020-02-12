@@ -5,7 +5,7 @@ RSpec.describe 'Post feature', type: :feature do
     has_x = { name: 'SomeN', email: 'someemilio@gmail.com' }
     has_x[:password] = 'wasausky'
     has_x[:password_confirmation] = 'wasausky'
-    
+
     has_x
   end
 
@@ -20,7 +20,6 @@ RSpec.describe 'Post feature', type: :feature do
     visit posts_path(user)
     assert_selector "input[type='submit']"
     assert_selector "input[name='post[content]']"
-    
   end
 
   scenario 'A created post should display author in timeline' do
@@ -51,8 +50,8 @@ RSpec.describe 'Post feature', type: :feature do
 
     post = user.posts.create(content: 'this is a post')
     comment = post.comments.create(content: 'this is a comment', user_id: user.id)
-    user.likes.create({post_id:post.id})
-    
+    user.likes.create(post_id: post.id)
+
     visit root_path
     expect(page).to have_content comment.content
     expect(page).to have_content 'Dislike!'
@@ -89,8 +88,4 @@ RSpec.describe 'Post feature', type: :feature do
     click_button 'comment'
     expect(page).to have_content(example_comment)
   end
-
-  
-
-  
 end
