@@ -2,7 +2,10 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
-
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -14,7 +17,7 @@
   <% end %>
   <div class="field">
     <%= f.label :gravatar_url %><br />
-    <%= f.text_field :gravatar_url, autofocus: true%>
+    <%= f.text_field :gravatar_url%>
   </div>
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />

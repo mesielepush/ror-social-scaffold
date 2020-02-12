@@ -39,7 +39,8 @@ class User < ApplicationRecord
     your_request = your_request.compact
 
     your_request += their_request
-    your_request.compact.to_set
+    your_request = your_request.compact.to_set
+    your_request.to_a
   end
 
   def pending_friends
