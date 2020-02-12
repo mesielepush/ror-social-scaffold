@@ -6,9 +6,9 @@
         <ul>
             <% current_user.friend_requests.each do |x| %>
                 <li>
-                    
                     <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
-                    <%= link_to label, user_path(x), class: 'post-author' %>
+                    <%= link_to label, user_path(x), class: 'post-author' %> :
+                    <%= link_to 'confirm friendship', confirm_friend_url( user_id: x, friend_id: current_user.id), class:'btn btn-info' %>
                 </li>
             <% end %>
         </ul>
@@ -29,5 +29,3 @@
     </div>
         
 </div>    
-
-    
