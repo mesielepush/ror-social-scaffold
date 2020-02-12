@@ -15,6 +15,7 @@
 #
 
 class User < ApplicationRecord
+  before_create :set_default_img
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -58,5 +59,10 @@ class User < ApplicationRecord
       return true if x == user
     end
     false
+  end
+  private
+
+  def set_default_img
+    self.gravatar_url = 'https://www.pinclipart.com/picdir/middle/55-559095_the-worst-start-up-ever-portfolio-icon-png.png' if gravatar_url.nil?
   end
 end
