@@ -4,7 +4,6 @@ class FriendshipsController < ApplicationController
     if Friendship.where(user_id: params[:user_id], friend_id: params[:friend_id], confirmed: false).exists? == false
 
       @friendship = Friendship.new(user_id: params[:user_id], friend_id: params[:friend_id], confirmed: false)
-      
 
       if @friendship.save
         redirect_to users_path, notice: 'You have requested a friendship.'
@@ -26,14 +25,14 @@ class FriendshipsController < ApplicationController
     friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
     friendship.confirmed = true
 
-    if  Friendship.where(user_id: params[:friend_id], friend_id: params[:user_id]).exists? == false
+    if Friendship.where(user_id: params[:friend_id], friend_id: params[:user_id]).exists? == false
       inverse = Friendship.new(user_id: params[:friend_id], friend_id: params[:user_id], confirmed: true).save
     else
       inverse = Friendship.find_by(user_id: params[:friend_id], friend_id: params[:user_id])
       inverse.confirmed = true
       inverse.save
-    end 
-    
+    end
+
     if friendship.save
       redirect_to friends_path, notice: 'You guys are friends now.'
     else
