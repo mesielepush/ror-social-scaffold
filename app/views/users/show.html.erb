@@ -1,9 +1,57 @@
 <section class="user-section">
-  <h2><%= "Name: #{@user.name}" %></h2>
+  <% if current_user.id == @user.id%>
+      
+      <% if current_user.gravatar_url == nil %>
+        ||no photo||
+        <%= link_to 'Edit Profile', edit_user_registration_path(current_user), class:'btn btn-info' %>
+      <% else %>
+        <%= image_tag( current_user.gravatar_url, width: 120, height: 120 ) %>
+      <% end  %>
+      
+      <h2 style='margin-top: 15px'><%= " hi, #{current_user.name}" %></h2>
+
+  <% else %>
+
+      <p> this is:</p> <h2><%= "#{@user.name}" %></h2>
+
+      <% if @user.gravatar_url != nil %>
+        <%= image_tag( @user.gravatar_url, width: 120, height: 120 ) %>
+      <% end  %>
+
+      <% if current_user.friend?(@user.id) %>
+        <p>
+          is your friend
+          <span>
+            <%= link_to 'destroy friendship', friends_destroy_path( user_id: @user.id, friend_id: current_user.id), class:'btn btn-info' %>
+          </span>
+        <p>
+      <% else  %>
+        <% if current_user.friend_requests.include?(@user.id) %>
+          <%= link_to 'confirm friendship', confirm_friend_url( user_id: @user.id, friend_id: current_user.id), class:'btn btn-info' %>
+        
+        <% elsif current_user.pending_friends.include?(@user.id) %>
+          <p>
+            wainting for response
+          <p>
+        <% else  %>
+          <%= link_to 'request_friendship', request_friendship_path(user_id: current_user.id, friend_id: @user.id), class:'btn btn-info' %>
+        <% end  %>
+
+      <% end  %>
+            
+      <% if @user.gravatar_url != nil %>
+        <%= image_tag( @user.gravatar_url, width: 120, height: 120 ) %>
+      <% end  %>
+
+  <% end %>
+  
   <article class="timeline">
-    <h3>Recent posts:</h3>
+    
+    <h3> Lastest %> </h3>
     <ul class="posts">
       <%= render @posts %>
     </ul>
+    
   </article>
+
 </section>
