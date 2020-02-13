@@ -42,8 +42,8 @@ class FriendshipsController < ApplicationController
   def destroy
     friendship = Friendship.find_by(user_id: params[:user_id], friend_id: params[:friend_id])
     inverse = Friendship.find_by(user_id: params[:friend_id], friend_id: params[:user_id])
-    friendship.delete
     inverse.delete
+    friendship.delete
     redirect_to friends_path, alert: 'You are not friends anymore.'
   end
 end
