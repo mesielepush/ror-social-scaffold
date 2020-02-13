@@ -26,7 +26,7 @@ class FriendshipsController < ApplicationController
     friendship.confirmed = true
 
     if Friendship.where(user_id: params[:friend_id], friend_id: params[:user_id]).exists? == false
-      inverse = Friendship.new(user_id: params[:friend_id], friend_id: params[:user_id], confirmed: true).save
+      inverse = Friendship.new(user_id: params[:friend_id], friend_id: params[:user_id], confirmed: true)
     else
       inverse = Friendship.find_by(user_id: params[:friend_id], friend_id: params[:user_id])
       inverse.confirmed = true
