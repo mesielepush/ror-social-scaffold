@@ -21,6 +21,9 @@
       <% if current_user.friend?(@user.id) %>
         <p>
           is your friend
+          <span>
+            <%= link_to 'destroy friendship', friends_destroy_path( user_id: @user.id, friend_id: current_user.id), class:'btn btn-info' %>
+          </span>
         <p>
       <% else  %>
         <% if current_user.friend_requests.include?(@user.id) %>

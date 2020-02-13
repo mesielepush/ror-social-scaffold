@@ -40,7 +40,6 @@ RSpec.describe 'Post feature', type: :feature do
   end
 
   scenario 'post should display likes  on timeline' do
-    # forever alone method
     user = User.create(user_valid)
     visit user_session_path
 
