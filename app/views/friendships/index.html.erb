@@ -1,0 +1,31 @@
+<div class= 'requests'>
+    <div>
+    <h3>
+            waiting for you...
+        </h3>
+        <ul>
+            <% current_user.friend_requests.each do |x| %>
+                <li>
+                    <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
+                    <%= link_to label, user_path(x), class: 'post-author' %> :
+                    <%= link_to 'confirm friendship', confirm_friend_url( user_id: x, friend_id: current_user.id), class:'btn btn-info' %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+    
+    <div>
+        <h3>
+            waiting for them...
+        </h3>
+        <ul>
+            <% current_user.pending_friends.each do |x| %>
+                <li>
+                    <p style = 'display: none'><%= label = User.find_by_id(x).name %> </p>
+                    <%= link_to label, user_path(x), class: 'post-author' %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+        
+</div>    
