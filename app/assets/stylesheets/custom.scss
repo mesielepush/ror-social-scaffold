@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap");
 
-$primary-color-dark: #689f38;
-$primary-color: #8bc34a;
-$primary-color-light: #dcedc8;
+$primary-color-dark: #3C5A98;
+$primary-color: #2664d6;
+$primary-color-light: #ffffff;
 $primary-color-text: #212121;
 $divider-color: #bdbdbd;
 
@@ -44,11 +44,11 @@ a {
 
   .menu {
     width: 80%;
-    justify-content: space-between;
+    justify-content: right;
 
     .menu-item {
-      float: left;
-      margin: 0 15px;
+      float: right;
+      margin: 0px 5px 0px 15px;
 
       .active {
         a {
@@ -61,7 +61,7 @@ a {
 
 .nav a {
   color: $primary-color-light;
-  text-transform: uppercase;
+  
   font-weight: 900;
 }
 
@@ -341,4 +341,13 @@ form {
   .user-section {
     width: 50%;
   }
+}
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #3C5A98;
+  color: white;
+  text-align: center;
 }
