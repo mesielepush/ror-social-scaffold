@@ -34,6 +34,7 @@ Setup database with:
 
 ```
    rails db:create
+   rails db:seed
    rails db:migrate
 ```
 
@@ -59,12 +60,13 @@ Open `http://localhost:3000/` in your browser.
 
 ### Deployment
 
-TBA
+https://limitless-atoll-45324.herokuapp.com/users/sign_in
+
 
 ## Authors
 
-TBA
-
+Jonathan Marín
+https://github.com/mesielepush
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
